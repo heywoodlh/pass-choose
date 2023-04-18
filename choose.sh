@@ -8,16 +8,16 @@ cd $PASSWORD_STORE_DIR
 
 if [[ $1 == 'totp' ]]
 then
-	type="totp"
+    type="totp"
 else
-	type="password"
+    type="password"
 fi
 
 selection="$(find -L . -name '*.gpg' | sed -e 's/.\///' -e 's/.gpg//' | choose)"
 
 if [ ${type} == "totp" ]
 then
-	pass otp ${selection} | pbcopy
+    echo -n $(pass otp ${selection}) | pbcopy
 else
-	pass ${selection} | head -1 | pbcopy
+    echo -n $(pass ${selection} | head -1) | pbcopy
 fi
